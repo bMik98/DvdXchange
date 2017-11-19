@@ -5,20 +5,31 @@ import javax.persistence.*;
 @Entity
 @Table(name = "taken_items")
 public class TakenItem {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
+    @ManyToOne
+    @JoinColumn(name = "disk_id")
     private Disk disk;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User holder;
 
-    public Long getId() {
+    public TakenItem() {
+    }
+
+    public TakenItem(Disk disk, User holder) {
+        this.disk = disk;
+        this.holder = holder;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 

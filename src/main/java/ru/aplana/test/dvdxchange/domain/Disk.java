@@ -3,21 +3,29 @@ package ru.aplana.test.dvdxchange.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name="disks")
+@Table(name = "disks")
 public class Disk {
-
     @Id
+    @Column(name = "disk_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private long id;
 
-    @Column(nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "owner_id")
+    private User owner;
+
     private String title;
 
-    public Long getId() {
+    public Disk(String title, User owner) {
+        this.title = title;
+        this.owner = owner;
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -27,5 +35,13 @@ public class Disk {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }
