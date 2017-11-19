@@ -1,5 +1,5 @@
 package ru.aplana.test.dvdxchange.dao;
 
 public interface UserDaoExtension {
-    long numberOf();
+    long numberOfDisks();
 }
